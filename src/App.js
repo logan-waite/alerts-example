@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+/** @jsxImportSource @emotion/react */
 import './App.css';
+import COLORS from './ui/colors';
+import { AlertsExample } from './components/AlertsExample';
+import { AlertsManager } from './components/AlertsManager';
+import { useAlertReducer } from './reducers/useAlertReducer';
+
+const appStyles = {
+  backgroundColor: COLORS.appBackground,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+}
 
 function App() {
+  const [alerts, dispatch] = useAlertReducer();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app" css={appStyles}>
+      <AlertsManager alerts={alerts}/>
+      <AlertsExample dispatch={(action) => dispatch(action)}/>
     </div>
   );
 }
